@@ -10,7 +10,7 @@
 	<name>E2ESelenium</name>
 	<!-- FIXME change it to the project's website -->
 	<url>http://www.example.com</url>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -64,6 +64,16 @@
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-testng</artifactId>
 			<version>7.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.18.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.18.0</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
