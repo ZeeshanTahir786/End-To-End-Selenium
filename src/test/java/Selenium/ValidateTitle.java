@@ -16,15 +16,11 @@ public class ValidateTitle extends Base {
 	public void initialize() throws IOException {
 		driver = initializeDriver();
 
-		driver.get("https://rahulshettyacademy.com");
+		driver.get(prop.getProperty("url"));
 	}
 
 	@Test
 	public void basePageNavigation() throws IOException {
-
-		driver = initializeDriver();
-
-		driver.get("https://rahulshettyacademy.com");
 
 		LandingPage landingPage = new LandingPage(driver);
 		Assert.assertEquals(landingPage.getTitle().getText(), "Featured Courses");
