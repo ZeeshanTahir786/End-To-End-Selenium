@@ -1,5 +1,7 @@
 package Selenium;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -11,6 +13,7 @@ import pageObjects.LandingPage;
 import resources.Base;
 
 public class ValidateTitle extends Base {
+	private static Logger log = LogManager.getLogger(ValidateTitle.class.getName());
 
 	@BeforeTest
 	public void initialize() throws IOException {
