@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import pageObjects.LandingPage;
 import resources.Base;
@@ -17,7 +18,8 @@ public class ValidateNavigationBar extends Base {
 
 		driver.get("https://rahulshettyacademy.com");
 	}
-
+	
+	@Test
 	public void basePageNavigation() {
 
 		LandingPage landingPage = new LandingPage(driver);
