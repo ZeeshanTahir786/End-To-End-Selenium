@@ -1,8 +1,7 @@
 package Selenium;
 
 import org.testng.annotations.Test;
-
-import org.testng.AssertJUnit;
+import org.testng.Assert;
 import java.io.IOException;
 import org.testng.annotations.DataProvider;
 
@@ -18,7 +17,7 @@ public class HomePageTest extends Base {
 
 		driver = initializeDriver();
 
-		driver.get("https://rahulshettyacademy.com");
+		driver.get(prop.getProperty("url"));
 
 		LandingPage landingPage = new LandingPage(driver);
 		landingPage.clickLoginBtn().click();
@@ -29,7 +28,7 @@ public class HomePageTest extends Base {
 		loginPage.clickLoginBtn().click();
 		
 		PortalHomePage page = new PortalHomePage(driver);
-		AssertJUnit.assertTrue(page.getSearchField().isDisplayed());
+		Assert.assertTrue(page.getSearchField().isDisplayed());
 	}
 
 	@DataProvider
@@ -40,8 +39,8 @@ public class HomePageTest extends Base {
 
 		Object[][] data = new Object[2][2];
 //		0th row
-		data[0][0] = "abc@gmail.com";
-		data[0][1] = "password";
+		data[0][0] = "test99@gmail.com";
+		data[0][1] = "123456";
 //		1th row
 		data[1][0] = "123abc@gmail.com";
 		data[1][1] = "password";

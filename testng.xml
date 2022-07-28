@@ -5,7 +5,7 @@
     <classes>
       <class name="Selenium.ValidateTitle"/>
       <class name="Selenium.HomePageTest"/>
-      <class name="Selenium.AppTest"/>
+      <class name="Selenium.ValidateNavigationBar"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

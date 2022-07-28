@@ -10,6 +10,7 @@ public class LandingPage {
 
 	By signIn = By.xpath("(//div[@class='login-btn'])[2]");
 	By title = By.cssSelector("div[class='pull-left'] h2");
+	By navigationBar = By.cssSelector("ul[class*='navigation']");
 
 	public LandingPage(WebDriver driver) {
 		this.driver = driver;
@@ -21,6 +22,9 @@ public class LandingPage {
 
 	public WebElement getTitle() {
 		return driver.findElement(title);
+	}
+	public WebElement getNavigationBar() {
+		return driver.findElement(navigationBar);
 	}
 
 }
