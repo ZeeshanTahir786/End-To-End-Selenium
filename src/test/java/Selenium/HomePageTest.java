@@ -1,6 +1,8 @@
 package Selenium;
 
 import org.testng.annotations.Test;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import java.io.IOException;
 
@@ -14,6 +16,7 @@ import pageObjects.PortalHomePage;
 import resources.Base;
 
 public class HomePageTest extends Base {
+	private static Logger log = LogManager.getLogger(Base.class.getName());
 
 	@BeforeTest
 	public void initialize() throws IOException {
@@ -35,6 +38,7 @@ public class HomePageTest extends Base {
 
 		PortalHomePage page = new PortalHomePage(driver);
 		Assert.assertTrue(page.getSearchField().isDisplayed());
+		log.info("Search Field is successfully displayed");
 	}
 
 	@DataProvider
@@ -48,8 +52,8 @@ public class HomePageTest extends Base {
 		data[0][0] = "test99@gmail.com";
 		data[0][1] = "123456";
 //		1th row
-		data[1][0] = "123abc@gmail.com";
-		data[1][1] = "password";
+		data[1][0] = "test99@gmail.com";
+		data[1][1] = "123456";
 
 		return data;
 	}
