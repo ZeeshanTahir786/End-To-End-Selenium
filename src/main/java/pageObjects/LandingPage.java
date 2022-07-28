@@ -9,7 +9,7 @@ public class LandingPage {
 	public WebDriver driver;
 
 	By signIn = By.xpath("(//div[@class='login-btn'])[2]");
-	By title = By.cssSelector("div[class='pull-left']");
+	By title = By.cssSelector("div[class='pull-left'] h2");
 
 	public LandingPage(WebDriver driver) {
 		this.driver = driver;
