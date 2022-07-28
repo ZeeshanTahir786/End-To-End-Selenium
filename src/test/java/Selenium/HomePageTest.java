@@ -3,6 +3,9 @@ package Selenium;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 import java.io.IOException;
+
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
 import pageObjects.LandingPage;
@@ -12,12 +15,15 @@ import resources.Base;
 
 public class HomePageTest extends Base {
 
-	@Test(dataProvider = "getData")
-	public void basePageNavigation(String username,String password) throws IOException {
-
+	@BeforeTest
+	public void initialize() throws IOException {
 		driver = initializeDriver();
 
-		driver.get(prop.getProperty("url"));
+		driver.get("https://rahulshettyacademy.com");
+	}
+
+	@Test(dataProvider = "getData")
+	public void basePageNavigation(String username, String password) throws IOException {
 
 		LandingPage landingPage = new LandingPage(driver);
 		landingPage.clickLoginBtn().click();
@@ -26,7 +32,7 @@ public class HomePageTest extends Base {
 		loginPage.enterEmail().sendKeys(username);
 		loginPage.enterPassword().sendKeys(password);
 		loginPage.clickLoginBtn().click();
-		
+
 		PortalHomePage page = new PortalHomePage(driver);
 		Assert.assertTrue(page.getSearchField().isDisplayed());
 	}
@@ -46,6 +52,11 @@ public class HomePageTest extends Base {
 		data[1][1] = "password";
 
 		return data;
+	}
+
+	@AfterTest
+	public void tearDown() {
+		driver.close();
 	}
 
 }
