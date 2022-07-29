@@ -42,7 +42,7 @@ public class StepDefinition extends Base {
 	@Then("^Verify that user is succesfully logged in$")
 	public void verify_that_user_is_succesfully_logged_in() throws Throwable {
 		PortalHomePage page = new PortalHomePage(driver);
-		Assert.assertTrue(page.getSearchField().isDisplayed());
+		Assert.assertEquals(page.getUsername().getText(), "Test99");
 	}
 
 	@And("^Close the browsers$")

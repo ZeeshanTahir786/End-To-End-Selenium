@@ -8,7 +8,7 @@ public class LandingPage {
 
 	public WebDriver driver;
 
-	By signIn = By.xpath("(//div[@class='login-btn'])[2]");
+	By signIn = By.cssSelector("a[href*='sign_in']");
 	By title = By.cssSelector("div[class='pull-left'] h2");
 	By navigationBar = By.cssSelector("ul[class*='navigation']");
 
@@ -23,6 +23,7 @@ public class LandingPage {
 	public WebElement getTitle() {
 		return driver.findElement(title);
 	}
+
 	public WebElement getNavigationBar() {
 		return driver.findElement(navigationBar);
 	}
