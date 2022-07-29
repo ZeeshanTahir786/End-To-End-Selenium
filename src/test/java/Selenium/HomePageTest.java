@@ -16,6 +16,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
+import pageObjects.ForgotPassword;
 import pageObjects.LandingPage;
 import pageObjects.LoginPage;
 import pageObjects.PortalHomePage;
@@ -63,38 +64,60 @@ public class HomePageTest extends Base {
 //
 ////		extent.flush();
 //	}
-	@Test(dataProvider = "getData")
-	public void basePageNavigation(String username, String password) {
+	@Test()
+	public void basePageNavigation() {
 		driver.get(prop.getProperty("url"));
-		LandingPage landingPage = new LandingPage(driver);
-		landingPage.clickLoginBtn().click();
+		LandingPage l = new LandingPage(driver);
+		LoginPage lp = l.getLogin(); // driver.findElement(By.css()
+		lp.enterEmail().sendKeys("test99@gmail.com");
+		lp.enterPassword().sendKeys("1234");
 
-		LoginPage loginPage = new LoginPage(driver);
-		loginPage.enterEmail().sendKeys(username);
-		loginPage.enterPassword().sendKeys(password);
-		loginPage.clickLoginBtn().click();
+		lp.getLogin().click();
+		ForgotPassword fp = lp.forgotPassword();
+		fp.getEmail().sendKeys("xxx");
+		fp.sendMeInstructions().click();
 
-		PortalHomePage page = new PortalHomePage(driver);
-		Assert.assertEquals(page.getUsername().getText(), "Test99");
-		log.info("Search Field is successfully displayed");
+//		PortalHomePage page = new PortalHomePage(driver);
+//		Assert.assertEquals(page.getUsername().getText(), "Test99");
+//		log.info("Search Field is successfully displayed");
+
 	}
+//	@Test(dataProvider = "getData")
+//	public void basePageNavigation(String username, String password) {
+//		driver.get(prop.getProperty("url"));
+//		LandingPage landingPage = new LandingPage(driver);
+//		LoginPage loginPage = landingPage.clickLoginBtn();
+//		
+//		loginPage.enterEmail().sendKeys(username);
+//		loginPage.enterPassword().sendKeys(password);
+//		loginPage.clickLoginBtn().click();
+//		
+//		
+//		ForgotPassword fp = loginPage.forgotPassword();
+//		fp.getEmail().sendKeys("abc@gmail.com");
+//		fp.sendMeInstructions().click();
+//
+//		PortalHomePage page = new PortalHomePage(driver);
+//		Assert.assertEquals(page.getUsername().getText(), "Test99");
+//		log.info("Search Field is successfully displayed");
+//	}
 
-	@DataProvider
-	public Object[][] getData() {
-
-//		Rows stands for how many different types of data types should run/test
-//		columns stands for how many values for each test / how many values you are sending for test
-
-		Object[][] data = new Object[2][2];
-//		0th row
-		data[0][0] = "test99@gmail.com";
-		data[0][1] = "123456";
-//		1th row
-		data[1][0] = "test99@gmail.com";
-		data[1][1] = "123456";
-
-		return data;
-	}
+//	@DataProvider
+//	public Object[][] getData() {
+//
+////		Rows stands for how many different types of data types should run/test
+////		columns stands for how many values for each test / how many values you are sending for test
+//
+//		Object[][] data = new Object[2][2];
+////		0th row
+//		data[0][0] = "test99@gmail.com";
+//		data[0][1] = "123456";
+////		1th row
+//		data[1][0] = "test99@gmail.com";
+//		data[1][1] = "123456";
+//
+//		return data;
+//	}
 
 	@AfterTest
 	public void tearDown() {

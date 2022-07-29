@@ -23,23 +23,26 @@ public class Listeners extends Base implements ITestListener {
 	ExtentReports extent = ExtentReportsNG.getReportObject();
 	ExtentTest test;
 
+	ThreadLocal<ExtentTest> extentTest = new ThreadLocal<ExtentTest>();
+
 	@Override
 	public void onTestStart(ITestResult result) {
 		// TODO Auto-generated method stub
 
 		test = extent.createTest(result.getMethod().getMethodName());
+		extentTest.set(test);
 
 	}
 
 	@Override
 	public void onTestSuccess(ITestResult result) {
 		// TODO Auto-generated method stub
-		test.log(Status.PASS, "Test Passed");
+		extentTest.get().log(Status.PASS, "Test Passed");
 	}
 
 	@Override
 	public void onTestFailure(ITestResult result) {
-		test.fail(result.getThrowable());
+		extentTest.get().fail(result.getThrowable());
 		WebDriver driver = null;
 		try {
 			driver = (WebDriver) result.getTestClass().getRealClass().getDeclaredField("driver")
@@ -58,12 +61,16 @@ public class Listeners extends Base implements ITestListener {
 			e1.printStackTrace();
 		}
 		String testMethodName = result.getMethod().getMethodName();
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File source = screenshot.getScreenshotAs(OutputType.FILE);
-		String destinationFile = "reports/" + testMethodName + ".png";
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File source = screenshot.getScreenshotAs(OutputType.FILE);
+//		String destinationFile = "reports/" + testMethodName + ".png";
 
 		try {
-			FileUtils.copyFile(source, new File(destinationFile));
+//			FileUtils.copyFile(source, new File(destinationFile));
+//			extentTest.get().addScreenCaptureFromPath(destinationFile, result.getMethod().getMethodName());
+			extentTest.get().addScreenCaptureFromPath(getScreenShotPath(testMethodName, driver),
+					result.getMethod().getMethodName());
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

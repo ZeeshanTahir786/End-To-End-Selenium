@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -40,19 +41,12 @@ public class Base {
 		return driver;
 	}
 
-	public static void captureScreenshot(WebDriver driver, String screenshotName) {
+	public String getScreenShotPath(String testCaseName, WebDriver driver) throws IOException {
+		TakesScreenshot ts = (TakesScreenshot) driver;
+		File source = ts.getScreenshotAs(OutputType.FILE);
+		String destinationFile = "reports/" + testCaseName + ".png";
+		FileUtils.copyFile(source, new File(destinationFile));
+		return destinationFile;
 
-		try {
-			TakesScreenshot ts = (TakesScreenshot) driver;
-
-			File source = ts.getScreenshotAs(OutputType.FILE);
-
-			FileHandler.copy(source, new File("./Screenshots/" + screenshotName + ".png"));
-
-			System.out.println("Screenshot taken");
-		} catch (Exception e) {
-
-			System.out.println("Exception while taking screenshot " + e.getMessage());
-		}
 	}
 }
